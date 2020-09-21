@@ -76,7 +76,7 @@ class BannerController extends Controller
             $grid->model()->orderBy('created_at', 'desc');
             $grid->id('ID')->sortable();
             $grid->column('title', '标题')->label('success');
-            $grid->image('图片')->image('', '150', '150');
+            $grid->image('图片')->image(env('IMG_URL'), '150', '150');
             $grid->url('链接')->label('danger');
             $grid->sort('排序')->sortable();
             $grid->status('状态')->display(function () {

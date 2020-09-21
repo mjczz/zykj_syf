@@ -76,7 +76,7 @@ class ProductController extends Controller
     protected function grid()
     {
         return Admin::grid(Product::class, function (Grid $grid) {
-            $model = $grid->model();
+            $model = $grid->model()->with(['category','items']);
             if (in_array(Request::get('type'), ['0', '1', '2', '3'])) {
                 $model = $model->where('type', Request::get('type'));
             } else {
@@ -119,7 +119,7 @@ class ProductController extends Controller
             })->sortable();
             $grid->sale_num('销量')->sortable();
             $grid->column('规格参数')->expand(function () {
-                $items = $this->items->toArray();
+                $items = $this->items;
                 $headers = ['ID', '商品规格', '商品单价', '会员价', '商品库存'];
                 $title = ['id', 'norm', 'unit_price', 'vip_price','quantity'];
                 $datas = array_map(function ($item) use ($title) {

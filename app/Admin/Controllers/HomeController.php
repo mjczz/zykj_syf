@@ -32,7 +32,7 @@ class HomeController extends Controller
             $content->row(Dashboard::title($data));
             $content->row(function (Row $row) {
               $start_day = Carbon::now()->startOfDay();
-              $end_day = Carbon::now()->endOfDay());
+              $end_day = Carbon::now()->endOfDay();
 
               $start_week = Carbon::now()->startOfWeek();
               $end_week = Carbon::now()->endOfWeek();

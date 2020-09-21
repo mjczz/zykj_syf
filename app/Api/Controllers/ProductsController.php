@@ -40,17 +40,17 @@ class ProductsController extends Controller
         $data = collect($datas)->forPage($page, 10);
       	$logs = [];
         foreach($data as $key => $item) {
-      			$images = $item->images ? collect(json_decode($item->images))->map( function ($val, $index) {
-				        return env('APP_URL_UPLOADS').'/evaluate/'. $val;
+            $images = $item->images ? collect(json_decode($item->images))->map( function ($val, $index) {
+                return env('APP_URL_UPLOADS').'/evaluate/'. $val;
             }) : '';
 
             $logs[$key]['user_name'] = $item->users->username ?? $item->users->nickname;
             $logs[$key]['avatar'] = $item->users->avatar;
 
             $logs[$key]['pro_size'] = $item->orderItems->norm;
-      			$logs[$key]['content'] = $item->content;
-      			$logs[$key]['images'] = $images;
-      			$logs[$key]['time'] = Carbon::parse($item->created_at)->toDateTimeString();
+            $logs[$key]['content'] = $item->content;
+            $logs[$key]['images'] = $images;
+            $logs[$key]['time'] = Carbon::parse($item->created_at)->toDateTimeString();
         }
 
        return response()->json(['status' => 'success', 'code' => '201', 'data' => $logs, 'toal' => $total, 'totalPage' => $totalPage]);
